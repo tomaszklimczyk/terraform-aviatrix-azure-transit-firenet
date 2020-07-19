@@ -9,23 +9,6 @@ resource "aviatrix_vpc" "default" {
   aviatrix_transit_vpc = false
 }
 
-/*# Single Transit GW
-resource "aviatrix_transit_gateway" "single" {
-  count                  = var.ha_gw ? 0 : 1
-  enable_active_mesh     = true
-  cloud_type             = 8
-  vpc_reg                = var.region
-  gw_name                = replace(lower("tg-${var.region}"), " ", "-")
-  gw_size                = var.instance_size
-  vpc_id                 = aviatrix_vpc.default.vpc_id
-  account_name           = var.azure_account_name
-  subnet                 = aviatrix_vpc.default.subnets[2].cidr
-  enable_transit_firenet = true
-  connected_transit      = true
-
-}
-*/
-
 # HA Transit GW
 resource "aviatrix_transit_gateway" "ha" {
  # count                  = var.ha_gw ? 1 : 0
@@ -44,21 +27,6 @@ resource "aviatrix_transit_gateway" "ha" {
 
 }
 
-#Firewall instances
-/*resource "aviatrix_firewall_instance" "firewall_instance" {
-  count                  = var.ha_gw ? 0 : 1
-  firewall_name          = replace(lower("fw1-${var.region}"), " ", "-")
-  firewall_size          = var.fw_instance_size
-  vpc_id                 = aviatrix_vpc.default.vpc_id
-  firewall_image         = var.firewall_image
-  firewall_image_version = var.firewall_image_version
-  egress_subnet          = aviatrix_vpc.default.subnets[0].cidr
-  firenet_gw_name        = aviatrix_transit_gateway.single[0].gw_name
-  iam_role               = null
-  bootstrap_bucket_name  = null
-  management_subnet      = aviatrix_vpc.default.subnets[2].cidr
-}
-*/
 resource "aviatrix_firewall_instance" "firewall_instance_1" {
   #count                  = var.ha_gw ? 1 : 0
   firewall_name          = replace(lower("fw1-${var.region}"), " ", "-")
@@ -86,25 +54,6 @@ resource "aviatrix_firewall_instance" "firewall_instance_2" {
   management_subnet      = aviatrix_vpc.default.subnets[3].cidr
   depends_on             = [aviatrix_firewall_instance.firewall_instance_1]
 }
-
-#Firenet
-/*resource "aviatrix_firenet" "firenet" {
-  count              = var.ha_gw ? 0 : 1
-  vpc_id             = aviatrix_vpc.default.vpc_id
-  inspection_enabled = true
-  egress_enabled     = true
-  firewall_instance_association {
-    firenet_gw_name      = aviatrix_transit_gateway.single[0].gw_name
-    instance_id          = aviatrix_firewall_instance.firewall_instance[0].instance_id
-    vendor_type          = "Generic"
-    firewall_name        = aviatrix_firewall_instance.firewall_instance[0].firewall_name
-    lan_interface        = aviatrix_firewall_instance.firewall_instance[0].lan_interface
-    management_interface = null
-    egress_interface     = aviatrix_firewall_instance.firewall_instance[0].egress_interface
-    attached             = var.attached
-  }
-}
-*/
 
 resource "aviatrix_firenet" "firenet_ha" {
 #  count              = var.ha_gw ? 1 : 0
