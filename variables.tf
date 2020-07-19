@@ -1,16 +1,10 @@
-variable "controller_ip" {}
-
-variable "username" {}
-
-variable "password" {}
-
 variable "region" {
   description = "The Azure region to deploy this module in"
   type        = string
 }
 
 variable "cidr" {
-  description = "The CIDR range to be used for the VPC"
+  description = "The CIDR range to be used for the VNET"
   type        = string
 }
 
@@ -31,12 +25,6 @@ variable "fw_instance_size" {
   default     = "Standard_D3_v2"
 }
 
-variable "ha_gw" {
-  description = "Boolean to determine if module will be deployed in HA or single mode"
-  type        = bool
-  default     = true
-}
-
 variable "is_checkpoint" {
   description = "Boolean to determine if module deploys Check Point"
   type        = bool
@@ -46,7 +34,7 @@ variable "is_checkpoint" {
 variable "checkpoint_password" {
   description = "Check Point firewall instance password"
   type        = string
-  default     = ""
+  default     = "Aviatrix#1234"
 }
 
 variable "attached" {

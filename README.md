@@ -82,6 +82,7 @@ instance_size | Standard_B2ms | Size of the transit gateway instances
 fw_instance_size | Standard_D3_v2 | Size of the firewall instances
 attached | true | Attach firewall instances to Aviatrix Gateways
 is_checkpoint | false | Set to true for Check Point firewalls
+checkpoint_password | Aviatrix#1234 | Default initial password for Check Point
 
 ### Outputs
 This module will return the following objects:
