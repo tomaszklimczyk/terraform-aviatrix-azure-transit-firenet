@@ -11,7 +11,6 @@ resource "aviatrix_vpc" "default" {
 
 # HA Transit GW
 resource "aviatrix_transit_gateway" "ha" {
- # count                  = var.ha_gw ? 1 : 0
   enable_active_mesh     = true
   cloud_type             = 8
   vpc_reg                = var.region
@@ -28,7 +27,6 @@ resource "aviatrix_transit_gateway" "ha" {
 }
 
 resource "aviatrix_firewall_instance" "firewall_instance_1" {
-  #count                  = var.ha_gw ? 1 : 0
   firewall_name          = replace(lower("fw1-${var.region}"), " ", "-")
   firewall_size          = var.fw_instance_size
   vpc_id                 = aviatrix_vpc.default.vpc_id
@@ -42,7 +40,6 @@ resource "aviatrix_firewall_instance" "firewall_instance_1" {
 }
 
 resource "aviatrix_firewall_instance" "firewall_instance_2" {
-  #count                  = var.ha_gw ? 1 : 0
   firewall_name          = replace(lower("fw2-${var.region}"), " ", "-")
   firewall_size          = var.fw_instance_size
   vpc_id                 = aviatrix_vpc.default.vpc_id
@@ -56,7 +53,6 @@ resource "aviatrix_firewall_instance" "firewall_instance_2" {
 }
 
 resource "aviatrix_firenet" "firenet_ha" {
-#  count              = var.ha_gw ? 1 : 0
   vpc_id             = aviatrix_vpc.default.vpc_id
   inspection_enabled = true
   egress_enabled     = true
