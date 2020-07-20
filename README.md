@@ -14,7 +14,7 @@ Examples shown below are specific to each vendor.
 ```
 module "transit_firenet_1" {
   source                 = "terraform-aviatrix-modules/azure-transit-firenet/aviatrix"
-  version                = "1.0.0"
+  version                = "1.0.1"
   cidr                   = "10.1.0.0/20"
   region                 = "East Us"
   azure_account_name     = "TM-Azure"
@@ -26,7 +26,7 @@ module "transit_firenet_1" {
 ```
 module "transit_firenet_1" {
   source                 = "terraform-aviatrix-modules/azure-transit-firenet/aviatrix"
-  version                = "1.0.0"
+  version                = "1.0.1"
   cidr                   = "10.1.0.0/20"
   region                 = "East Us"
   azure_account_name     = "TM-Azure"
@@ -40,7 +40,7 @@ module "transit_firenet_1" {
 ```
 module "transit_firenet_1" {
   source                 = "terraform-aviatrix-modules/azure-transit-firenet/aviatrix"
-  version                = "1.0.0"
+  version                = "1.0.1"
   cidr                   = "10.1.0.0/20"
   region                 = "East Us"
   azure_account_name     = "TM-Azure"
@@ -95,6 +95,8 @@ aviatrix_firenet | The created Aviatrix firenet object with all of it's attribut
 aviatrix_firewall_instance | A list of the created firewall instances and their attributes.
 
 #### Azure Infrastructure Created
+
+The module automates creation of 44 infrastructure components in Azure.
 
 <img src="https://avtx-tf-modules-images.s3.amazonaws.com/azure-firenet-module-infr.png"  height="350">
 
