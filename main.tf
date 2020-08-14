@@ -48,9 +48,8 @@ resource "aviatrix_firewall_instance" "firewall_instance_2" {
   egress_subnet          = aviatrix_vpc.default.subnets[1].cidr
   firenet_gw_name        = "${aviatrix_transit_gateway.ha.gw_name}-hagw"
   username               = var.is_checkpoint ? "admin" : "fw_admin"
-    password               = var.is_checkpoint ? var.checkpoint_password : ""
+  password               = var.is_checkpoint ? var.checkpoint_password : ""
   management_subnet      = aviatrix_vpc.default.subnets[3].cidr
-  depends_on             = [aviatrix_firewall_instance.firewall_instance_1]
 }
 
 resource "aviatrix_firenet" "firenet_ha" {
