@@ -1,18 +1,3 @@
-variable "controller_ip" {
-  type        = string
-  default     = ""
-}
-
-variable "username" {
-  type        = string
-  default     = ""
-}
-
-variable "password" {
-  type        = string
-  default     = ""
-}
-
 variable "region" {
   description = "The Azure region to deploy this module in"
   type        = string
