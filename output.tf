@@ -16,7 +16,7 @@ output "aviatrix_firenet" {
 
 output "aviatrix_firewall_instance" {
   description = "A list with the created firewall instances and their attributes"
-  value       = [aviatrix_firewall_instance.firewall_instance_1, aviatrix_firewall_instance.firewall_instance_2] 
+  value       = [aviatrix_firewall_instance.firewall_instance_1, aviatrix_firewall_instance.firewall_instance_2]
 }
 
 
