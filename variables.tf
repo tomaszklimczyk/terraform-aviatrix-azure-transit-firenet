@@ -1,3 +1,18 @@
+variable "controller_ip" {
+  type        = string
+  default     = ""
+}
+
+variable "username" {
+  type        = string
+  default     = ""
+}
+
+variable "password" {
+  type        = string
+  default     = ""
+}
+
 variable "region" {
   description = "The Azure region to deploy this module in"
   type        = string
@@ -34,7 +49,7 @@ variable "is_checkpoint" {
 variable "checkpoint_password" {
   description = "Check Point firewall instance password"
   type        = string
-  default     = "Aviatrix#1234"
+  default     = ""
 }
 
 variable "attached" {
