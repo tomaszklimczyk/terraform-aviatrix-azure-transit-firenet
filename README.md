@@ -66,7 +66,6 @@ azure_account_name | The Azure access account on the Aviatrix controller, under 
 cidr | The IP CIDR wo be used to create the VNET
 firewall_image | String for the firewall image to use
 firewall_image_version | String for the firewall image version to use
-checkpoint_password | Default initial password for Check Point, only required when using Check Point image
 
 Firewall images
 ```
@@ -91,6 +90,7 @@ fw_instance_size | Standard_D3_v2 | Size of the firewall instances
 attached | true | Attach firewall instances to Aviatrix Gateways
 firewall_username | fw_admin | Default username for administrative account on the firewall. For Check Point firewalls it will always default to admin.
 ha_gw | true | Set to false to deploy single Aviatrix gateway. When set to false, fw_amount is ignored and only a single NGFW instance is deployed.
+checkpoint_password | Aviatrix#1234 | Default initial password for Check Point, only required when using Check Point image
 
 ### Outputs
 This module will return the following objects:
