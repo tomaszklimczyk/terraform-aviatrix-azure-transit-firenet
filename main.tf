@@ -83,6 +83,7 @@ resource "aviatrix_firewall_instance" "firewall_instance_2" {
   username               = var.is_checkpoint ? "admin" : "fw_admin"
   password               = var.is_checkpoint ? var.checkpoint_password : ""
   management_subnet      = aviatrix_vpc.default.subnets[3].cidr
+<<<<<<< HEAD
 }
 
 resource "aviatrix_firenet" "firenet_single" {
@@ -100,6 +101,8 @@ resource "aviatrix_firenet" "firenet_single" {
     egress_interface     = aviatrix_firewall_instance.firewall_instance.egress_interface
     attached             = var.attached
   }
+=======
+>>>>>>> master
 }
 
 resource "aviatrix_firenet" "firenet_ha" {
