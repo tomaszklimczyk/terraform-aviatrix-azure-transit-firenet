@@ -58,7 +58,7 @@ variable "firewall_image_version" {
 variable "firewall_username" {
   description = "The username for the administrator account"
   type        = string
-  default     = "fw_admin"
+  default     = "fwadmin"
 }
 
 variable "ha_gw" {
