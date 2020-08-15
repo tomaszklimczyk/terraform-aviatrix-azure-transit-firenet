@@ -88,7 +88,7 @@ key | default | value
 instance_size | Standard_B2ms | Size of the transit gateway instances
 fw_instance_size | Standard_D3_v2 | Size of the firewall instances
 attached | true | Attach firewall instances to Aviatrix Gateways
-firewall_username | fw_admin | Default username for administrative account on the firewall. For Check Point firewalls it will always default to admin.
+firewall_username | fw_admin | Default username for administrative account on the firewall. For Check Point firewalls it will always default to admin. Admin is not allowed for other image types.
 ha_gw | true | Set to false to deploy single Aviatrix gateway. When set to false, fw_amount is ignored and only a single NGFW instance is deployed.
 checkpoint_password | Aviatrix#1234 | Default initial password for Check Point, only required when using Check Point image
 
