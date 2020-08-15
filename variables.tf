@@ -67,5 +67,5 @@ variable "ha_gw" {
 }
 
 locals {
-  is_checkpoint = length(regexall("check", ${lower(var.firewall_image)})) > 0 #? true : false #Check if fw image contains checkpoint. Needs special handling for the username
+  is_checkpoint = length(regexall("check", lower(var.firewall_image))) > 0 #? true : false #Check if fw image contains checkpoint. Needs special handling for the username
 }
