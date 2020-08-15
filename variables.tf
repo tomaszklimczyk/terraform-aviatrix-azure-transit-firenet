@@ -36,6 +36,7 @@ variable "is_checkpoint" {
 variable "checkpoint_password" {
   description = "Check Point firewall instance password"
   type        = string
+  default     = "Aviatrix#1234"
 }
 
 variable "attached" {
