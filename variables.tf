@@ -53,3 +53,9 @@ variable "firewall_image_version" {
   type        = string
 }
 
+variable "ha_gw" {
+  description = "Set to false to deploy single Aviatrix gateway. When set to false, fw_amount is ignored and only a single NGFW instance is deployed."
+  type        = bool
+  default     = true
+}
+

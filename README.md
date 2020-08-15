@@ -83,6 +83,7 @@ fw_instance_size | Standard_D3_v2 | Size of the firewall instances
 attached | true | Attach firewall instances to Aviatrix Gateways
 is_checkpoint | false | Set to true for Check Point firewalls
 checkpoint_password | Aviatrix#1234 | Default initial password for Check Point
+ha_gw | true | Set to false to deploy single Aviatrix gateway. When set to false, fw_amount is ignored and only a single NGFW instance is deployed.
 
 ### Outputs
 This module will return the following objects:
