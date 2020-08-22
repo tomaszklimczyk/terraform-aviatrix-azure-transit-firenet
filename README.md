@@ -6,6 +6,14 @@ This module deploys a VNET, Aviatrix transit gateways (HA), and firewall instanc
 ### Diagram
 <img src="https://avtx-tf-modules-images.s3.amazonaws.com/azure-transit-firenet.png"  height="250">
 
+### Compatibility
+Module version | Terraform version | Controller version | Terraform provider version
+:--- | :--- | :--- | :---
+v1.0.2 | 0.12 | 6.1 | 2.16, 2.16.1
+v1.0.2 | 0.12 | 6.0 | 2.15, 2.15.1
+v1.0.1 | 0.12 | |
+v1.0.0 | 0.12 | |
+
 ### Usage Example
 
 Examples shown below are specific to each vendor.
@@ -81,8 +89,9 @@ key | default | value
 instance_size | Standard_B2ms | Size of the transit gateway instances
 fw_instance_size | Standard_D3_v2 | Size of the firewall instances
 attached | true | Attach firewall instances to Aviatrix Gateways
-is_checkpoint | false | Set to true for Check Point firewalls
-checkpoint_password | Aviatrix#1234 | Default initial password for Check Point
+firewall_username | fwadmin | Default username for administrative account on the firewall. For Check Point firewalls it will always default to admin. Admin is not allowed for other image types. Should not contain special chars.
+ha_gw | true | Set to false to deploy single Aviatrix gateway. When set to false, fw_amount is ignored and only a single NGFW instance is deployed.
+checkpoint_password | Aviatrix#1234 | Default initial password for Check Point, only required when using Check Point image
 
 ### Outputs
 This module will return the following objects:

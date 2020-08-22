@@ -25,16 +25,18 @@ variable "fw_instance_size" {
   default     = "Standard_D3_v2"
 }
 
+/*
 variable "is_checkpoint" {
   description = "Boolean to determine if module deploys Check Point"
   type        = bool
   default     = false
 }
+*/
 
 variable "checkpoint_password" {
   description = "Check Point firewall instance password"
   type        = string
-  default     = ""
+  default     = "Aviatrix#1234"
 }
 
 variable "attached" {
@@ -53,3 +55,18 @@ variable "firewall_image_version" {
   type        = string
 }
 
+variable "firewall_username" {
+  description = "The username for the administrator account"
+  type        = string
+  default     = "fwadmin"
+}
+
+variable "ha_gw" {
+  description = "Set to false to deploy single Aviatrix gateway. When set to false, fw_amount is ignored and only a single NGFW instance is deployed."
+  type        = bool
+  default     = true
+}
+
+locals {
+  is_checkpoint = length(regexall("check", lower(var.firewall_image))) > 0 #Check if fw image contains checkpoint. Needs special handling for the username/password
+}
