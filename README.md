@@ -92,7 +92,7 @@ attached | true | Attach firewall instances to Aviatrix Gateways
 firewall_username | fwadmin | Default username for administrative account on the firewall. For Check Point firewalls it will always default to admin. Admin is not allowed for other image types. Should not contain special chars.
 ha_gw | true | Set to false to deploy single Aviatrix gateway. When set to false, fw_amount is ignored and only a single NGFW instance is deployed.
 checkpoint_password | Aviatrix#1234 | Default initial password for Check Point, only required when using Check Point image
-insande_mode | false | Set to true to enable Aviatrix insane mode high-performance encryption 
+insane_mode | false | Set to true to enable Aviatrix insane mode high-performance encryption 
 name | null | When this string is set, user defined name is applied to all infrastructure supporting n+1 sets within a same region or other customization
 
 ### Outputs

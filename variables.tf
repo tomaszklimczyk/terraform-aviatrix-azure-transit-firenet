@@ -36,7 +36,7 @@ variable "is_checkpoint" {
 variable "checkpoint_password" {
   description = "Check Point firewall instance password"
   type        = string
-  default     = "#Aviatrix1234"
+  default     = "Aviatrix#1234"
 }
 
 variable "attached" {
@@ -81,22 +81,4 @@ variable "insane_mode" {
   description = "Set to true to enable Aviatrix high performance encryption."
   type        = bool
   default     = false
-}
-
-
-####
-
-variable "controller_ip" {
-  type    = string
-  default = ""
-}
-
-variable "username" {
-  type    = string
-  default = ""
-}
-
-variable "password" {
-  type    = string
-  default = ""
 }
