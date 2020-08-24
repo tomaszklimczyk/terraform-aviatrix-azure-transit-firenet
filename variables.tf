@@ -8,7 +8,7 @@ variable "cidr" {
   type        = string
 }
 
-variable "azure_account_name" {
+variable "account_name" {
   description = "The Azure account name, as known by the Aviatrix controller"
   type        = string
 }
@@ -72,6 +72,19 @@ variable "ha_gw" {
   type        = bool
   default     = true
 }
+
+variable "egress_enabled" {
+  description = "Set to true to enable egress inspection on the firewall instances"
+  type        = bool
+  default     = false
+}
+
+variable "inspection_enabled" {
+  description = "Set to false to disable inspection on the firewall instances"
+  type        = bool
+  default     = true
+}
+
 
 locals {
   is_checkpoint = length(regexall("check", lower(var.firewall_image))) > 0 #Check if fw image contains checkpoint. Needs special handling for the username/password

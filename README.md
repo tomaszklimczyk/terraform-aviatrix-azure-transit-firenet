@@ -25,7 +25,7 @@ module "transit_firenet_1" {
   version                = "1.0.1"
   cidr                   = "10.1.0.0/20"
   region                 = "East Us"
-  azure_account_name     = "TM-Azure"
+  account_name           = "TM-Azure"
   firewall_image         = "Palo Alto Networks VM-Series Next-Generation Firewall Bundle 1"
   firewall_image_version = "9.1.0"
 }
@@ -37,7 +37,7 @@ module "transit_firenet_1" {
   version                = "1.0.1"
   cidr                   = "10.1.0.0/20"
   region                 = "East Us"
-  azure_account_name     = "TM-Azure"
+  account_name           = "TM-Azure"
   firewall_image         = "Check Point CloudGuard IaaS Single Gateway R80.40 - Bring Your Own License" 
   firewall_image_version = "8040.900294.0593"
 }
@@ -51,7 +51,7 @@ module "transit_firenet_1" {
   version                = "1.0.1"
   cidr                   = "10.1.0.0/20"
   region                 = "East Us"
-  azure_account_name     = "TM-Azure"
+  account_name           = "TM-Azure"
   firewall_image         = "Fortinet FortiGate (BYOL) Next-Generation Firewall"
   firewall_image_version = "6.4.1"
 }
@@ -63,10 +63,10 @@ The following variables are required:
 key | value
 --- | ---
 region | Azure region to deploy the transit VNET in
-azure_account_name | The Azure access account on the Aviatrix controller, under which the controller will deploy this VNET
+account_name | The Azure access account on the Aviatrix controller, under which the controller will deploy this VNET
 cidr | The IP CIDR wo be used to create the VNET
 firewall_image | String for the firewall image to use
-firewall_image_version | String for the firewall image version to use
+
 
 Firewall images
 ```
@@ -86,7 +86,7 @@ The following variables are optional:
 
 key | default | value
 :--- | :--- | :---
-instance_size | Standard_B2ms | Size of the transit gateway instances
+instance_size | Standard_B2ms | Size of the transit gateway instances. **Insane mode requires a minimum Standard_D3_v2 instance size**
 fw_instance_size | Standard_D3_v2 | Size of the firewall instances
 attached | true | Attach firewall instances to Aviatrix Gateways
 firewall_username | fwadmin | Default username for administrative account on the firewall. For Check Point firewalls it will always default to admin. Admin is not allowed for other image types. Should not contain special chars.
@@ -94,6 +94,8 @@ ha_gw | true | Set to false to deploy single Aviatrix gateway. When set to false
 checkpoint_password | Aviatrix#1234 | Default initial password for Check Point, only required when using Check Point image
 insane_mode | false | Set to true to enable Aviatrix insane mode high-performance encryption 
 name | null | When this string is set, user defined name is applied to all infrastructure supporting n+1 sets within a same region or other customization
+egress_enabled | false | Set to true to enable egress inspection on the firewall instances
+inspection_enabled | true | Set to false to disable inspection on the firewall instances
 
 ### Outputs
 This module will return the following objects:
