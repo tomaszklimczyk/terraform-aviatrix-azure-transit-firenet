@@ -8,7 +8,7 @@ variable "cidr" {
   type        = string
 }
 
-variable "azure_account_name" {
+variable "account_name" {
   description = "The Azure account name, as known by the Aviatrix controller"
   type        = string
 }
@@ -45,6 +45,12 @@ variable "attached" {
   default     = true
 }
 
+variable "name" {
+  description = "Custom name for VNETs, gateways, and firewalls"
+  type        = string
+  default     = ""
+}
+
 variable "firewall_image" {
   description = "The firewall image to be used to deploy the NGFW's"
   type        = string
@@ -67,6 +73,25 @@ variable "ha_gw" {
   default     = true
 }
 
+variable "egress_enabled" {
+  description = "Set to true to enable egress inspection on the firewall instances"
+  type        = bool
+  default     = false
+}
+
+variable "inspection_enabled" {
+  description = "Set to false to disable inspection on the firewall instances"
+  type        = bool
+  default     = true
+}
+
+
 locals {
   is_checkpoint = length(regexall("check", lower(var.firewall_image))) > 0 #Check if fw image contains checkpoint. Needs special handling for the username/password
+}
+
+variable "insane_mode" {
+  description = "Set to true to enable Aviatrix high performance encryption."
+  type        = bool
+  default     = false
 }
