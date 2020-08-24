@@ -19,7 +19,8 @@ resource "aviatrix_transit_gateway" "single" {
   gw_size                = var.instance_size
   vpc_id                 = aviatrix_vpc.default.vpc_id
   account_name           = var.azure_account_name
-  subnet                 = aviatrix_vpc.default.subnets[2].cidr
+  subnet                 = var.insane_mode ? cidrsubnet(aviatrix_vpc.default.cidr, 3, 6) : aviatrix_vpc.default.subnets[0].cidr
+  insane_mode            = var.insane_mode ? true : false
   enable_transit_firenet = true
   connected_transit      = true
 }
