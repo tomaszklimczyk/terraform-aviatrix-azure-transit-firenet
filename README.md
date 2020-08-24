@@ -92,6 +92,8 @@ attached | true | Attach firewall instances to Aviatrix Gateways
 firewall_username | fwadmin | Default username for administrative account on the firewall. For Check Point firewalls it will always default to admin. Admin is not allowed for other image types. Should not contain special chars.
 ha_gw | true | Set to false to deploy single Aviatrix gateway. When set to false, fw_amount is ignored and only a single NGFW instance is deployed.
 checkpoint_password | Aviatrix#1234 | Default initial password for Check Point, only required when using Check Point image
+insande_mode | false | Set to true to enable Aviatrix insane mode high-performance encryption 
+name | null | When this string is set, user defined name is applied to all infrastructure supporting n+1 sets within a same region or other customization
 
 ### Outputs
 This module will return the following objects:
@@ -102,6 +104,12 @@ vpc | The created VNET as an object with all of it's attributes. This was create
 transit_gateway | The created Aviatrix transit gateway as an object with all of it's attributes.
 aviatrix_firenet | The created Aviatrix firenet object with all of it's attributes.
 aviatrix_firewall_instance | A list of the created firewall instances and their attributes.
+azure_rg | The name of the Azure resource group that the Aviatrix infrastructure created in
+azure_vnet_name | The name of the Azure vnet created
+firewall_instance_1_nic_name | The name of the NIC of the first firewall
+firewall_instance_2_nic_name | The name of the NIC of the second firewall
+fw_name | A list of the firewall names created
+
 
 #### Azure Infrastructure Created
 

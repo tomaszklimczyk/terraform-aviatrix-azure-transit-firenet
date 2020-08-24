@@ -36,13 +36,19 @@ variable "is_checkpoint" {
 variable "checkpoint_password" {
   description = "Check Point firewall instance password"
   type        = string
-  default     = "Aviatrix#1234"
+  default     = "#Aviatrix1234"
 }
 
 variable "attached" {
   description = "Boolean to determine if the spawned firewall instances will be attached on creation"
   type        = bool
   default     = true
+}
+
+variable "name" {
+  description = "Custom name for VNETs, gateways, and firewalls"
+  type        = string
+  default     = ""
 }
 
 variable "firewall_image" {
@@ -69,4 +75,28 @@ variable "ha_gw" {
 
 locals {
   is_checkpoint = length(regexall("check", lower(var.firewall_image))) > 0 #Check if fw image contains checkpoint. Needs special handling for the username/password
+}
+
+variable "insane_mode" {
+  description = "Set to true to enable Aviatrix high performance encryption."
+  type        = bool
+  default     = false
+}
+
+
+####
+
+variable "controller_ip" {
+  type    = string
+  default = ""
+}
+
+variable "username" {
+  type    = string
+  default = ""
+}
+
+variable "password" {
+  type    = string
+  default = ""
 }

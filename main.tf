@@ -1,7 +1,7 @@
 #Transit VPC
 resource "aviatrix_vpc" "default" {
   cloud_type           = 8
-  name                 = replace(lower("vnet-transit-${var.region}"), " ", "-")
+  name                 = length(var.name) > 0 ? "avx-${var.name}-transit" : replace(lower("avx-${var.region}-transit"), " ", "-")
   region               = var.region
   cidr                 = var.cidr
   account_name         = var.azure_account_name
@@ -15,7 +15,7 @@ resource "aviatrix_transit_gateway" "single" {
   enable_active_mesh     = true
   cloud_type             = 8
   vpc_reg                = var.region
-  gw_name                = replace(lower("tg-${var.region}"), " ", "-")
+  gw_name                = length(var.name) > 0 ? "avx-${var.name}-transit" : replace(lower("avx-${var.region}-transit"), " ", "-")
   gw_size                = var.instance_size
   vpc_id                 = aviatrix_vpc.default.vpc_id
   account_name           = var.azure_account_name
@@ -30,21 +30,22 @@ resource "aviatrix_transit_gateway" "ha" {
   enable_active_mesh     = true
   cloud_type             = 8
   vpc_reg                = var.region
-  gw_name                = replace(lower("tg-${var.region}"), " ", "-")
-  gw_size                = var.instance_size
+  gw_name                = length(var.name) > 0 ? "avx-${var.name}-transit" : replace(lower("avx-${var.region}-transit"), " ", "-")
+  gw_size                = var.insane_mode ? "Standard_D3_v2" : var.instance_size
   vpc_id                 = aviatrix_vpc.default.vpc_id
   account_name           = var.azure_account_name
-  subnet                 = aviatrix_vpc.default.subnets[2].cidr
-  ha_subnet              = aviatrix_vpc.default.subnets[3].cidr
+  subnet                 = var.insane_mode ? cidrsubnet(aviatrix_vpc.default.cidr, 3, 6) : aviatrix_vpc.default.subnets[0].cidr
+  ha_subnet              = var.insane_mode ? cidrsubnet(aviatrix_vpc.default.cidr, 3, 7) : aviatrix_vpc.default.subnets[2].cidr
+  insane_mode            = var.insane_mode ? true : false
   enable_transit_firenet = true
-  ha_gw_size             = var.instance_size
+  ha_gw_size             = var.insane_mode ? "Standard_D3_v2" : var.instance_size
   connected_transit      = true
 }
 
 #Single instance
 resource "aviatrix_firewall_instance" "firewall_instance" {
   count                  = var.ha_gw ? 0 : 1
-  firewall_name          = replace(lower("fw1-${var.region}"), " ", "-")
+  firewall_name          = length(var.name) > 0 ? "avx-${var.name}-fw1" : replace(lower("avx-${var.region}-fw1"), " ", "-")
   firewall_size          = var.fw_instance_size
   vpc_id                 = aviatrix_vpc.default.vpc_id
   firewall_image         = var.firewall_image
@@ -59,7 +60,7 @@ resource "aviatrix_firewall_instance" "firewall_instance" {
 #Dual instance
 resource "aviatrix_firewall_instance" "firewall_instance_1" {
   count                  = var.ha_gw ? 1 : 0
-  firewall_name          = replace(lower("fw1-${var.region}"), " ", "-")
+  firewall_name          = length(var.name) > 0 ? "avx-${var.name}-fw1" : replace(lower("avx-${var.region}-fw1"), " ", "-")
   firewall_size          = var.fw_instance_size
   vpc_id                 = aviatrix_vpc.default.vpc_id
   firewall_image         = var.firewall_image
@@ -73,7 +74,7 @@ resource "aviatrix_firewall_instance" "firewall_instance_1" {
 
 resource "aviatrix_firewall_instance" "firewall_instance_2" {
   count                  = var.ha_gw ? 1 : 0
-  firewall_name          = replace(lower("fw2-${var.region}"), " ", "-")
+  firewall_name          = length(var.name) > 0 ? "avx-${var.name}-fw2" : replace(lower("avx-${var.region}-fw2"), " ", "-")
   firewall_size          = var.fw_instance_size
   vpc_id                 = aviatrix_vpc.default.vpc_id
   firewall_image         = var.firewall_image
