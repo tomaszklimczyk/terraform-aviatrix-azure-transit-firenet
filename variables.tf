@@ -33,8 +33,8 @@ variable "is_checkpoint" {
 }
 */
 
-variable "checkpoint_password" {
-  description = "Check Point firewall instance password"
+variable "firewall_password" {
+  description = "Firewall instance password"
   type        = string
   default     = "Aviatrix#1234"
 }
