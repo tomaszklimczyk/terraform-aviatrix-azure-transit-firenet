@@ -90,6 +90,14 @@ locals {
   is_checkpoint = length(regexall("check", lower(var.firewall_image))) > 0 #Check if fw image contains checkpoint. Needs special handling for the username/password
 }
 
+locals {
+  is_paloalto = length(regexall("palo", lower(var.firewall_image))) > 0 #Check if fw image contains palo. Needs special handling for interfaces.
+}
+
+locals {
+  is_fortinet = length(regexall("fortinet", lower(var.firewall_image))) > 0 #Check if fw image contains fortinet. For future use.
+}
+
 variable "insane_mode" {
   description = "Set to true to enable Aviatrix high performance encryption."
   type        = bool
