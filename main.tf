@@ -55,7 +55,7 @@ resource "aviatrix_firewall_instance" "firewall_instance" {
   firenet_gw_name        = aviatrix_transit_gateway.single[0].gw_name
   username               = local.is_checkpoint ? "admin" : var.firewall_username
   password               = var.firewall_password
-  management_subnet      = aviatrix_vpc.default.subnets[2].cidr
+  management_subnet      = aviatrix_vpc.default.subnets[0].cidr
 }
 
 #Dual instance
